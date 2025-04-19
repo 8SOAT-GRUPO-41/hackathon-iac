@@ -30,7 +30,7 @@ resource "aws_s3_bucket_notification" "video_upload_notification" {
     id            = "video-raw-files-upload"
     queue_arn     = module.video_processing_queue.queue_arn
     events        = ["s3:ObjectCreated:*"]
-    filter_suffix = "/raw"
+    filter_prefix = "raw/"
   }
   
   depends_on = [module.video_processing_queue]
