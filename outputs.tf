@@ -50,3 +50,14 @@ output "api_gateway_endpoint" {
   description = "API Gateway endpoint URL"
   value       = module.hackathon_http_api.api_endpoint
 }
+
+output "video_processing_queue_url" {
+  description = "Video processing queue URL"
+  value       = module.video_processing_queue.queue_url
+}
+
+output "video_processing_queue_arn" {
+  description = "Video processing queue ARN"
+  value       = module.video_processing_queue.queue_arn
+}
+
