@@ -6,5 +6,6 @@
 # - network.tf: VPC, subnets, internet gateway, NAT gateway, route tables
 # - eks.tf: EKS cluster configuration
 # - api_gateway.tf: API Gateway configuration
+# - s3.tf: S3 bucket configuration
 
 # See each individual file for more details on the resources defined. 
