@@ -1,40 +1,57 @@
 variable "bucket_name" {
-  description = "The name of the S3 bucket"
+  description = "Name of the S3 bucket"
   type        = string
 }
 
 variable "environment" {
-  description = "Environment tag for the S3 bucket"
+  description = "Tag for environment"
   type        = string
-  default     = "production"
 }
 
 variable "enable_versioning" {
-  description = "Enable versioning for the S3 bucket"
+  description = "Enable versioning on the bucket"
   type        = bool
   default     = false
 }
 
-variable "transition_days" {
-  description = "Number of days before transitioning objects to STANDARD_IA storage class"
-  type        = number
-  default     = 30
-}
-
-variable "expiration_days" {
-  description = "Number of days before objects expire"
-  type        = number
-  default     = 365
-}
-
 variable "enable_cors" {
-  description = "Enable CORS for the S3 bucket"
+  description = "Whether to enable CORS"
   type        = bool
   default     = false
 }
 
 variable "cors_allowed_origins" {
-  description = "List of allowed origins for CORS"
+  description = "List of allowed CORS origins"
   type        = list(string)
-  default     = ["*"]
+  default     = []
+}
+
+variable "transition_days" {
+  description = "Days before transitioning to STANDARD_IA"
+  type        = number
+  default     = 30
+}
+
+variable "expiration_days" {
+  description = "Days before object expiration"
+  type        = number
+  default     = 365
+}
+
+variable "website" {
+  description = "Create as a static‑website bucket if true"
+  type        = bool
+  default     = false
+}
+
+variable "index_document" {
+  description = "Index document for website hosting"
+  type        = string
+  default     = "index.html"
+}
+
+variable "error_document" {
+  description = "Error document for website hosting"
+  type        = string
+  default     = "error.html"
 }
