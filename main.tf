@@ -102,6 +102,25 @@ module "hackathon_public_subnet_b" {
 }
 
 #######################################
+# Internet Gateway
+#######################################
+module "internet_gateway" {
+  source = "./modules/aws/internet_gateway"
+  vpc_id = module.hackathon_vpc.vpc_id
+  name   = "hackathon-public-igw"
+}
+
+#######################################
+# NAT Gateway - in Public Subnet
+#######################################
+module "nat_gateway" {
+  source    = "./modules/aws/nat_gateway"
+  subnet_id = module.hackathon_public_subnet_a.subnet_id
+  name      = "hackathon-nat-gw"
+}
+
+
+#######################################
 # Route Tables
 #######################################
 # Public Route Table
@@ -116,6 +135,23 @@ module "hackathon_private_rt" {
   source = "./modules/aws/route_table"
   vpc_id = module.hackathon_vpc.vpc_id
   name   = "hackathon-private-rt"
+}
+
+#######################################
+# Routes
+#######################################
+# Public route to internet
+resource "aws_route" "hackathon_public_inet_route" {
+  route_table_id         = module.hackathon_public_rt.route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = module.internet_gateway.internet_gateway_id
+}
+
+# Private route via NAT Gateway
+resource "aws_route" "hackathon_private_inet_route" {
+  route_table_id         = module.hackathon_private_rt.route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = module.nat_gateway.nat_gateway_id
 }
 
 #######################################
