@@ -18,6 +18,23 @@ module "video_processing_queue" {
   }
 }
 
+# FIFO queue that is going to receive messages from my video processing lambda and be consumed by my EKS backend
+module "processing_job_status_queue_fifo" {
+  source = "./modules/aws/sqs"
+
+  queue_name  = "processing-job-status-queue.fifo"
+  environment = var.environment
+
+  fifo_queue = true
+}
+
+module "notification_queue" {
+  source = "./modules/aws/sqs"
+
+  queue_name  = "notification-queue"
+  environment = var.environment
+}
+
 # S3 bucket notification configuration
 resource "aws_s3_bucket_notification" "video_upload_notification" {
   bucket = module.hackathon_video_bucket.bucket_id
@@ -34,4 +51,4 @@ resource "aws_s3_bucket_notification" "video_upload_notification" {
   }
 
   depends_on = [module.video_processing_queue]
-} 
+}
