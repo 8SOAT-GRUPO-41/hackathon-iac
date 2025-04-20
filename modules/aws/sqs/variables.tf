@@ -17,13 +17,13 @@ variable "delay_seconds" {
 variable "max_message_size" {
   description = "The limit of how many bytes a message can contain before Amazon SQS rejects it"
   type        = number
-  default     = 262144  # 256 KiB
+  default     = 262144 # 256 KiB
 }
 
 variable "message_retention_seconds" {
   description = "The number of seconds Amazon SQS retains a message"
   type        = number
-  default     = 345600  # 4 days
+  default     = 345600 # 4 days
 }
 
 variable "receive_wait_time_seconds" {
@@ -48,6 +48,24 @@ variable "content_based_deduplication" {
   description = "Enables content-based deduplication for FIFO queues"
   type        = bool
   default     = false
+}
+
+variable "redrive_policy_enabled" {
+  description = "Boolean designating whether to enable the redrive policy for DLQ"
+  type        = bool
+  default     = false
+}
+
+variable "max_receive_count" {
+  description = "The number of times a message can be unsuccessfully dequeued before being moved to the dead-letter queue"
+  type        = number
+  default     = 5
+}
+
+variable "dead_letter_queue_arn" {
+  description = "The ARN of the dead-letter queue to which SQS moves messages"
+  type        = string
+  default     = null
 }
 
 variable "policy_principal" {

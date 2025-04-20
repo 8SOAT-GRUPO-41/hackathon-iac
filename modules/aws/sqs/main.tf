@@ -8,6 +8,11 @@ resource "aws_sqs_queue" "this" {
   fifo_queue                  = var.fifo_queue
   content_based_deduplication = var.content_based_deduplication
 
+  redrive_policy = var.redrive_policy_enabled && var.dead_letter_queue_arn != null ? jsonencode({
+    deadLetterTargetArn = var.dead_letter_queue_arn
+    maxReceiveCount     = var.max_receive_count
+  }) : null
+
   tags = {
     Name        = var.queue_name
     Environment = var.environment
@@ -30,4 +35,4 @@ resource "aws_sqs_queue_policy" "this" {
       }
     ]
   })
-} 
+}

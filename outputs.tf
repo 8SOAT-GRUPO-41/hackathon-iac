@@ -61,3 +61,18 @@ output "video_processing_queue_arn" {
   value       = module.video_processing_queue.queue_arn
 }
 
+output "video_processing_dlq_url" {
+  description = "Video processing dead letter queue URL"
+  value       = module.video_processing_dlq.queue_url
+}
+
+output "video_processing_dlq_arn" {
+  description = "Video processing dead letter queue ARN"
+  value       = module.video_processing_dlq.queue_arn
+}
+
+output "video_processing_dlq_alarm_arn" {
+  description = "Video processing DLQ CloudWatch alarm ARN"
+  value       = module.video_processing_dlq_alarm.alarm_arn
+}
+
