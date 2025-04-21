@@ -52,4 +52,9 @@ variable "eks_node_max_capacity" {
   description = "Maximum number of EKS worker nodes"
   type        = number
   default     = 2
-} 
+}
+
+variable "backend_nlb_name" {
+  description = "Name of the NLB for the backend service"
+  type        = string
+}
