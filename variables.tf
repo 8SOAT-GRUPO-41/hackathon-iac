@@ -58,3 +58,18 @@ variable "backend_nlb_name" {
   description = "Name of the NLB for the backend service"
   type        = string
 }
+
+variable "rds_username" {
+  description = "Username for the RDS instance"
+  type        = string
+}
+
+variable "rds_password" {
+  description = "Password for the RDS instance"
+  type        = string
+}
+
+variable "rds_db_name" {
+  description = "Name of the RDS database"
+  type        = string
+}
