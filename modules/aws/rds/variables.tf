@@ -66,6 +66,7 @@ variable "engine_version" {
 variable "parameter_group_name" {
   description = "Parameter group name"
   type        = string
+  default     = "default.postgres16"
 }
 
 variable "public_subnet_ids" {
