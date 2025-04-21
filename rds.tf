@@ -29,7 +29,6 @@ module "hackathon_rds" {
   name                   = "${var.project_name}-rds"
   subnet_group_name      = "${var.project_name}-subnet-group"
   db_name                = var.rds_db_name
-  parameter_group_name   = "postgres16"
 
   subnet_ids = [
     module.hackathon_public_subnet_a.subnet_id,
